@@ -1,0 +1,48 @@
+
+// assumes we are at top of hello kitty repo
+
+
+// BUILD
+
+echo
+echo "Building Node Info WEB SERVER ..."
+echo
+docker build -t nodeinfo ./
+
+echo
+docker images
+
+
+
+// TEST
+
+echo
+echo "Testing Node Info WEB SERVER ..."
+echo
+
+docker run -p 31115:80 nodeinfo
+
+curl http://localhost:31115
+
+echo
+
+
+
+// Update DOCKER HUB
+
+
+
+
+docker login
+
+docker tag nodeinfo gwaines/nodeinfo:v1.0
+
+docker push gwaines/nodeinfo:v1.0
+
+docker run -p 31115:80 gwaines/nodeinfo:v1.0
+
+
+
+
+
+

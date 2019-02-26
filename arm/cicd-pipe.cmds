@@ -1,0 +1,48 @@
+
+// assumes we are at top of hello kitty repo
+
+
+// BUILD
+
+echo
+echo "Building Hello Kitty WEB SERVER ..."
+echo
+docker build -t hellokitty ./
+
+echo
+docker images
+
+
+
+// TEST
+
+echo
+echo "Testing Hello Kitty WEB SERVER ..."
+echo
+
+docker run -p 31111:80 hellokitty
+
+curl http://localhost:31111
+
+echo
+
+
+
+// Update DOCKER HUB
+
+
+
+
+docker login
+
+docker tag hellokitty gwaines/testapp:v1.0
+
+docker push gwaines/testapp:v1.0
+
+docker run -p 31111:80 gwaines/testapp:v1.0
+
+
+
+
+
+
