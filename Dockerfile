@@ -15,6 +15,10 @@ EXPOSE 80
 
 # Define environment variable
 ENV NAME WEBSERVER
+ARG version_id
+ENV VERSIONID $version_id
+ARG build_date
+ENV BUILDDATE $build_date
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]

@@ -6,7 +6,7 @@ echo
 echo "Building Node Info WEB SERVER ..."
 echo
 
-VERSIONID=$(cat versionid)
+export VERSIONID=$(cat versionid)
 echo "Building version $VERSIONID ..."
 echo
 
@@ -28,7 +28,9 @@ do
 done
 echo
 
-docker build -t nodeinfo ./
+
+BUILDDATE=$(date)
+docker build --build-arg version_id=$VERSIONID --build-arg build_date="$BUILDDATE" -t nodeinfo ./
 
 echo
 docker images
@@ -43,6 +45,6 @@ else
    echo "Image built successfully."
 fi
 
-./test-cicd-job.sh
+./cicd/test-cicd-job.sh
 
 exit 0

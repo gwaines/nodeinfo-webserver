@@ -12,24 +12,30 @@ def get_ip():
 
 @app.route("/")
 def hello():
-    html = "<CENTER><h2>Node Info {name}</h2></CENTER>" \
+    html = "<CENTER><h2>Node Info {name} ({buildVersion})</h2></CENTER>" \
+           "<CENTER><h4>[ Build Date: {buildDate} ]</h4></CENTER>" \
            "<CENTER><IMG SRC=\"/static/smallNodeinfo.png\" ALIGN=\"TOP\"></CENTER>" \
 	   "<HR>" \
 	   "<b>Container:</b><br/>" \
 	   "<b>&nbsp&nbsp&nbsp&nbsp IP Address:</b> {ipaddr}<br/>" \
 	   "<b>&nbsp&nbsp&nbsp&nbsp Container :</b> {container}<br/>" \
 	   "<br/>" \
-	   "<b>Platform  :</b> {plat}<br/>" \
-	   "<b>Machine   :</b> {mach}<br/>" \
-	   "<b>Node      :</b> {node}<br/>" \
-	   "<b>System    :</b> {sys}<br/>" \
-	   "<b>Release   :</b> {rel}<br/>" \
-	   "<b>Version   :</b> {version}<br/>" \
-	   "<b>Uname     :</b> {uname}<br/>" \
-	   "<b>CPUs      :</b> {cpus}<br/>" \
-	   "<b>MEMORY    :</b> {memory}<br/>" \
+	   "<b>Host      :</b><br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp Platform  :</b> {plat}<br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp Machine   :</b> {mach}<br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp Node      :</b> {node}<br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp System    :</b> {sys}<br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp Release   :</b> {rel}<br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp Version   :</b> {version}<br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp Uname     :</b> {uname}<br/>" \
+	   "<br/>" \
+	   "<b>Resources :</b><br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp CPUs      :</b> {cpus}<br/>" \
+	   "<b>&nbsp&nbsp&nbsp&nbsp Memory(GB):</b> {memory}<br/>" \
 	   "<HR>"
     return html.format(name=os.getenv("NAME", "Web Server"), 
+                       buildVersion=os.getenv("VERSIONID", "Unknown Version"), 
+                       buildDate=os.getenv("BUILDDATE", "Unknown Build Date"), 
                        ipaddr=get_ip(), 
 		       container=socket.gethostname(), 
 		       plat=platform.platform(),

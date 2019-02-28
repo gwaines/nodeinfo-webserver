@@ -45,6 +45,6 @@ echo
 CONTAINERID=$(docker ps | grep nodeinfo | awk '{print $1}')
 docker rm $CONTAINERID --force
 
-./post-cicd-job.sh
+./cicd/post-cicd-job.sh
 
 exit 0
