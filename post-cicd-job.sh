@@ -13,12 +13,10 @@ VERSIONID=$(cat versionid)
 docker tag nodeinfo gwaines/nodeinfo:$VERSIONID
 docker images
 
+docker login -u gwaines -p windriver
+docker push gwaines/nodeinfo:$VERSIONID
 
-# docker login
-# docker push gwaines/nodeinfo:$VERSIONID
-
-
-##### docker run -d -p 31115:80 gwaines/nodeinfo:v1.0
+##### docker run -d -p 31115:80 gwaines/nodeinfo:$VERSIONID
 
 ./deploy-cicd-job.sh
 
