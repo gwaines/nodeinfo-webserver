@@ -1,7 +1,6 @@
 # nodeinfo-webserver
 
 A simple test container application which implements a web server that displays host node info.
-TESTING
 
 <p align="center">
   <img src="./nodeinfo.png" alt="screenshot"
