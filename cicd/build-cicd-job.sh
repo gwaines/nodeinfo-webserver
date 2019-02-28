@@ -6,6 +6,10 @@ echo
 echo "Building Node Info WEB SERVER ..."
 echo
 
+whoami
+pwd
+echo
+
 export VERSIONID=$(cat versionid)
 echo "Building version $VERSIONID ..."
 echo
