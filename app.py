@@ -9,12 +9,19 @@ app = Flask(__name__)
 def get_ip():
     return socket.gethostbyname(socket.gethostname())
 
+def get_image_name():
+    imageStr = "/static/NodeInfoOnTITANIUMCENTOS.png"
+    platformStr = platform.platform()
+    if platformStr.__contains__("yocto"):
+        imageStr = "/static/NodeInfoOnWRLINUX.png"
+    return imageStr
+
 
 @app.route("/")
 def hello():
     html = "<CENTER><h2>Node Info {name} ({buildVersion})</h2></CENTER>" \
            "<CENTER><h4>[ Build Date: {buildDate} ]</h4></CENTER>" \
-           "<CENTER><IMG SRC=\"/static/smallNodeinfo.png\" ALIGN=\"TOP\"></CENTER>" \
+           "<CENTER><IMG SRC=\"{imageName}\" ALIGN=\"TOP\"></CENTER>" \
 	   "<HR>" \
 	   "<b>Container:</b><br/>" \
 	   "<b>&nbsp&nbsp&nbsp&nbsp IP Address:</b> {ipaddr}<br/>" \
@@ -36,6 +43,7 @@ def hello():
     return html.format(name=os.getenv("NAME", "Web Server"), 
                        buildVersion=os.getenv("VERSIONID", "Unknown Version"), 
                        buildDate=os.getenv("BUILDDATE", "Unknown Build Date"), 
+                       imageName=get_image_name(), 
                        ipaddr=get_ip(), 
 		       container=socket.gethostname(), 
 		       plat=platform.platform(),
