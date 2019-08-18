@@ -6,4 +6,4 @@ services:
 language: python
 
 script:
-  - echo 'Running test: PASSED'
+  - true
