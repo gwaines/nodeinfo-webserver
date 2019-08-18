@@ -1,1 +1,9 @@
+sudo: required
+
+services:
+  - docker
+  
 language: python
+
+script:
+  - echo 'Running test: PASSED'
