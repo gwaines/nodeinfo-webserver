@@ -13,4 +13,4 @@ script:
   - ./cicd/test-cicd-job.sh
   
 after_success:
-  - ./cicd/test-cicd-job.sh
+  - ./cicd/post-cicd-job.sh
