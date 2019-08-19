@@ -15,6 +15,11 @@ kubectl config set-credentials admin-user --token=${token}
 kubectl config set-context mycluster-context --cluster=mycluster --user admin-user --namespace=default
 kubectl config use-context mycluster-context
 
-kubectl apply -f ./cicd/nodeinfo-webserver.yaml
+rm -rf deploy.yaml
+cp ./cicd/nodeinfo-webserver.yaml deploy.yaml
+VERSIONID=$(cat versionid)
+sed -i "s/VERSIONID/${VERSIONID}/g" deploy.yaml
+
+kubectl apply -f ./deploy.yaml
 
 exit 0
