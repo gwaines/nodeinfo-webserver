@@ -20,6 +20,7 @@ docker push gwaines/nodeinfo:$VERSIONID
 
 ##### docker run -d -p 31115:80 gwaines/nodeinfo:$VERSIONID
 
-./cicd/deploy-cicd-job.sh
+# If success, then next job
+# ./cicd/deploy-cicd-job.sh
 
 exit 0
