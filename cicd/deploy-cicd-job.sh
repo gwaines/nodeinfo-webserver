@@ -15,6 +15,6 @@ kubectl config set-credentials admin-user --token=${token}
 kubectl config set-context mycluster-context --cluster=mycluster --user admin-user --namespace=default
 kubectl config use-context mycluster-context
 
-kubectl get nodes
+kubectl apply -f ./cicd/nodeinfo-webserver.yaml
 
 exit 0
