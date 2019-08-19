@@ -7,10 +7,6 @@ A simple test container application which implements a web server that displays 
        width="650" height="335">
 </p>
 
-There are actually two versions of the webserver:
-* amd64 version, and 
-* arm version
-
 
 ## Header2 Title
 
