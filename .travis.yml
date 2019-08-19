@@ -23,6 +23,4 @@ script:
   
 after_success:
   - ./cicd/post-cicd-job.sh ${DOCKER_REPO} ${DOCKER_IMAGE} ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
-
-deploy:
   - ./cicd/deploy-cicd-job.sh ${DEPLOY_SERVER} ${DEPLOY_ADMIN_TOKEN}
