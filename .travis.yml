@@ -6,4 +6,4 @@ services:
 language: python
 
 script:
-  - true
+  - ./cicd/build-cicd-job.sh
