@@ -1,18 +1,20 @@
 #!/bin/bash
+#  ./deploy-cicd-job.sh <ipAddress> <token>
 
-#### DEPLOY
+if [ $# -ne 2 ]; then
+    echo "deploy-cicd-job.sh: wrong number of arguments"
+    exit $#
+fi
 
-echo
-echo "Deploying Node Info WEB SERVER ..."
-echo
+serverIp=$1
+token=$2
 
-export VERSIONID=$(cat versionid)
+rm -rf ~/.kube/config
+kubectl config set-cluster mycluster --server=https://${serverIp}:6443 --insecure-skip-tls-verify
+kubectl config set-credentials admin-user --token=${token}
+kubectl config set-context mycluster-context --cluster=mycluster --user admin-user --namespace=default
+kubectl config use-context mycluster-context
 
-cp ./cicd/nodeinfo-webserver.yaml /tmp
-sed -i "s/VERSIONID/$VERSIONID/" /tmp/nodeinfo-webserver.yaml
-
-./cicd/deployScp.sh 128.224.141.54 wrsroot Li69nux* /tmp/nodeinfo-webserver.yaml /tmp
-
-./cicd/deployCmd.sh 128.224.141.54 wrsroot Li69nux* kubectl apply -f /tmp/nodeinfo-webserver.yaml
+kubectl get nodes
 
 exit 0
