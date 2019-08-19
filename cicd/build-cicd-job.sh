@@ -49,6 +49,7 @@ else
    echo "Image built successfully."
 fi
 
-./cicd/test-cicd-job.sh
+# If success, then next job 
+# ./cicd/test-cicd-job.sh
 
 exit 0
