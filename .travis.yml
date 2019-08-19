@@ -5,5 +5,12 @@ services:
   
 language: python
 
+install:
+  - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+
 script:
   - ./cicd/build-cicd-job.sh
+  - ./cicd/test-cicd-job.sh
+  
+after_success:
+  - ./cicd/test-cicd-job.sh
