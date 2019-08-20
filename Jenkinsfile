@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/gwaines/nodeinfo-webserver'
+        git 'https://github.com/gwaines/nodeinfo-webserver' 'master'
       }
     }
     stage('Python Test') {
