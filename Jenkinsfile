@@ -1,9 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('Build Docker Image') {
+    stage('Pre-Build Checks') {
       steps {
         echo 'Building ...'
+        sh 'cat app.py'
       }
     }
   }
