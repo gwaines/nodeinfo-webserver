@@ -2,7 +2,7 @@ pipeline {
   environment {
     repository           = "gwaines"
     image                = "nodeinfo"
-    version              = sh(script: "cat versionid ", returnStdout: true)
+    version              = sh(script: "cat versionid ", returnStdout: true).trim()
     versionID            = "v1.9"
     dockerImage          = ""
     localContainer       = ""
@@ -22,7 +22,7 @@ pipeline {
         sh 'docker images'
 	echo "Version: <$version>"
         script {
-	  def fullImageName = repository + "/" + image + ":" + version.trim()
+	  def fullImageName = repository + "/" + image + ":" + version
           dockerImage = docker.build fullImageName
         }
         sh 'docker images'
