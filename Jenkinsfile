@@ -43,8 +43,9 @@ pipeline {
       steps {
         echo 'Deploying to Docker Hub ...'
         script {
-          dockerImage.withRegistry('', 'windriver')
-          dockerImage.push()
+          docker.withRegistry('', 'gwainesDockerHubCredentials') {
+            dockerImage.push()
+	  }
         }
       }
     }
