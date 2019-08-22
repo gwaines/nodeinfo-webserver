@@ -15,7 +15,6 @@ pipeline {
         script {
 	  version = sh( returnStdout: true, script: 'cat versionid')
         }
-	sh 'echo "Version: " $version'
       }
     }
     stage('Building Container Image') {
