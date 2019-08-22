@@ -1,7 +1,7 @@
 pipeline {
   environment {
     repository           = "gwaines/"
-    image                = "nodeinfo-webserver"
+    image                = "nodeinfo"
     version              = "v1.8"
     repositoryCredential = "St8rlingX*"
     dockerImage          = ""
