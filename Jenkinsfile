@@ -17,7 +17,7 @@ pipeline {
     stage('Building Container Image') {
       steps{
         echo 'Building Container Image...'
-        sh 'docker rmi ${repository}${image}:${version}'
+        sh 'docker rmi ${repository}${image}:${version};echo "..."'
         sh 'docker images'
         script {
 	  def fullImageName = repository + image + ":" + version
