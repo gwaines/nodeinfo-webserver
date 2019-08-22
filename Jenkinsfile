@@ -13,10 +13,9 @@ pipeline {
       steps {
         echo 'Nothing to build, its Python ...'
         script {
-	  def vId = sh(  returnStdout: true, script: 'cat versionid')
+	  def vId = sh( returnStdout: true, script: 'cat versionid')
           env.version =  vId
         }
-	echo "Version: " $version
       }
     }
     stage('Building Container Image') {
