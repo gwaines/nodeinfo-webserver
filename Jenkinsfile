@@ -17,10 +17,13 @@ pipeline {
     stage('Building Container Image') {
       steps{
         echo 'Building Container Image...'
+        sh 'docker rmi ${repository}${image}:${version}'
+        sh 'docker images'
         script {
 	  def fullImageName = repository + image + ":" + version
           dockerImage = docker.build fullImageName
         }
+        sh 'docker images'
       }
     }
     stage('Testing Container Image Locally') {
