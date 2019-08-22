@@ -5,6 +5,7 @@ pipeline {
     version              = "v1.8"
     repositoryCredential = "St8rlingX*"
     dockerImage          = ""
+    localContainer       = ""
   }
   agent any
   stages {
@@ -29,6 +30,13 @@ pipeline {
     stage('Testing Container Image Locally') {
       steps {
         echo 'Testing Container Image Locally ...'
+        script {
+          localContainer = dockerImage.run('-d -p 31115:80')
+        }
+        sh 'curl http://localhost:31115'
+        script {
+          localContainer.stop()
+        }
       }
     }
     stage('Deploying to Docker Hub') {
