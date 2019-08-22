@@ -1,9 +1,7 @@
 pipeline {
   environment {
-    repository           = "gwaines/"
+    repository           = "gwaines"
     image                = "nodeinfo"
-    version              = ""
-    versionId            = "v1.9"
     dockerImage          = ""
     localContainer       = ""
   }
@@ -12,20 +10,19 @@ pipeline {
     stage('Build Application') {
       steps {
         echo 'Nothing to build, its Python ...'
-	sh 'cat versionid'
-        script {
-	  version = sh( returnStdout: true, script: 'cat versionid | xargs')
-          env.version = version
-        }
+	sh 'cat app.py'
       }
     }
     stage('Building Container Image') {
       steps{
         echo 'Building Container Image...'
+	environment {
+	  version = sh(script: 'cat versionid', , returnStdout: true).trim()
+	}
         sh 'set +e; docker rmi ${repository}${image}:${version};echo "..."'
         sh 'docker images'
         script {
-	  def fullImageName = repository + image + ":" + version
+	  def fullImageName = repository + "/" + image + ":" + version
           dockerImage = docker.build fullImageName
         }
         sh 'docker images'
