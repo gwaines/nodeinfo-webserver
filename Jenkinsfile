@@ -2,6 +2,7 @@ pipeline {
   environment {
     repository           = "gwaines"
     image                = "nodeinfo"
+    version              = sh(script: 'cat versionid', returnStdout: true)
     dockerImage          = ""
     localContainer       = ""
   }
@@ -16,9 +17,6 @@ pipeline {
     stage('Building Container Image') {
       steps{
         echo 'Building Container Image...'
-	environment {
-	  version = sh(script: 'cat versionid', returnStdout: true)
-	}
         sh 'set +e; docker rmi ${repository}${image}:${version};echo "..."'
         sh 'docker images'
         script {
