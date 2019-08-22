@@ -17,7 +17,7 @@ pipeline {
       steps{
         echo 'Building Container Image...'
 	environment {
-	  version = sh(script: 'cat versionid', , returnStdout: true).trim()
+	  version = sh(script: 'cat versionid', returnStdout: true)
 	}
         sh 'set +e; docker rmi ${repository}${image}:${version};echo "..."'
         sh 'docker images'
