@@ -20,6 +20,7 @@ pipeline {
         echo 'Building Container Image...'
         sh 'set +e; docker rmi ${repository}/${image}:${version};echo "..."'
         sh 'docker images'
+	echo "Version: <$version>"
         script {
 	  def fullImageName = repository + "/" + image + ":" + versionID
           dockerImage = docker.build fullImageName
