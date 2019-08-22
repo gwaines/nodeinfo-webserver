@@ -42,6 +42,10 @@ pipeline {
     stage('Deploying to Docker Hub') {
       steps {
         echo 'Deploying to Docker Hub ...'
+        script {
+          dockerImage.withRegistry('', 'windriver')
+          dockerImage.push()
+        }
       }
     }
     stage('Deploying to Canary Kubernetes Site') {
