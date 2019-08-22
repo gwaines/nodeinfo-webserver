@@ -14,7 +14,7 @@ pipeline {
         echo 'Nothing to build, its Python ...'
         script {
 	  cat app.py
-	  version = `cat versionid`
+	  version = cat versionid
 	  echo $version
         }
       }
