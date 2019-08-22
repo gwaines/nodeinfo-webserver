@@ -12,7 +12,11 @@ pipeline {
     stage('Build Application') {
       steps {
         echo 'Nothing to build, its Python ...'
-        sh 'cat app.py'
+        script {
+	  cat app.py
+	  version = `cat versionid`
+	  echo $version
+        }
       }
     }
     stage('Building Container Image') {
@@ -42,11 +46,13 @@ pipeline {
     stage('Deploying to Docker Hub') {
       steps {
         echo 'Deploying to Docker Hub ...'
+	/*
         script {
           docker.withRegistry('', 'gwainesDockerHubCredentials') {
             dockerImage.push()
 	  }
         }
+	*/
       }
     }
     stage('Deploying to Canary Kubernetes Site') {
