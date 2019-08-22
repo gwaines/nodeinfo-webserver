@@ -2,7 +2,7 @@ pipeline {
   environment {
     repository           = "gwaines"
     image                = "nodeinfo"
-    version              = sh(script: 'cat versionid', returnStdout: true)
+    version              = sh(script: 'cat versionid | xargs', returnStdout: true)
     versionID            = "v1.9"
     dockerImage          = ""
     localContainer       = ""
