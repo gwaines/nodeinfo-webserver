@@ -13,7 +13,7 @@ pipeline {
         echo 'Nothing to build, its Python ...'
 	sh 'cat versionid'
         script {
-	  version = sh( returnStdout: true, script: 'cat versionid')
+	  version = sh( returnStdout: true, script: 'cat versionid | xargs')
         }
       }
     }
