@@ -3,7 +3,6 @@ pipeline {
     repository           = "gwaines/"
     image                = "nodeinfo"
     version              = ""
-    repositoryCredential = "St8rlingX*"
     dockerImage          = ""
     localContainer       = ""
   }
@@ -12,9 +11,9 @@ pipeline {
     stage('Build Application') {
       steps {
         echo 'Nothing to build, its Python ...'
+	sh 'cat versionid'
         script {
-	  def vId = sh( returnStdout: true, script: 'cat versionid')
-          version =  vId
+	  version = sh( returnStdout: true, script: 'cat versionid')
         }
 	sh 'echo "Version: " $version'
       }
