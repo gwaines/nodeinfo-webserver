@@ -16,7 +16,7 @@ pipeline {
 	  def vId = sh(  returnStdout: true, script: 'cat versionid')
           env.version =  vId
         }
-	echo 'Version: $version'
+	echo "Version: " $version
       }
     }
     stage('Building Container Image') {
@@ -46,13 +46,11 @@ pipeline {
     stage('Deploying to Docker Hub') {
       steps {
         echo 'Deploying to Docker Hub ...'
-	/*
         script {
           docker.withRegistry('', 'gwainesDockerHubCredentials') {
             dockerImage.push()
 	  }
         }
-	*/
       }
     }
     stage('Deploying to Canary Kubernetes Site') {
