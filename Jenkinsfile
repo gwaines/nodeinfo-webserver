@@ -18,13 +18,13 @@ pipeline {
       steps{
         echo 'Building Container Image...'
         echo 'BEFORE: docker images'
-        sh 'sudo docker images'
+        sh 'docker images'
         script {
 	  def fullImageName = repository + image + ":" + version
           dockerImage = docker.build fullImageName
         }
         echo 'AFTER: docker images'
-        sh 'sudo docker images'
+        sh 'docker images'
       }
     }
     stage('Testing Container Image Locally') {
