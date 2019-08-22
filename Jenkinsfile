@@ -3,6 +3,7 @@ pipeline {
     repository           = "gwaines/"
     image                = "nodeinfo"
     version              = ""
+    versionId            = "v1.9"
     dockerImage          = ""
     localContainer       = ""
   }
@@ -14,6 +15,7 @@ pipeline {
 	sh 'cat versionid'
         script {
 	  version = sh( returnStdout: true, script: 'cat versionid | xargs')
+          env.version = version
         }
       }
     }
