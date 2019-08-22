@@ -2,7 +2,7 @@ pipeline {
   environment {
     repository           = "gwaines/"
     image                = "nodeinfo"
-    version              = "v1.8"
+    version              = ""
     repositoryCredential = "St8rlingX*"
     dockerImage          = ""
     localContainer       = ""
@@ -13,10 +13,10 @@ pipeline {
       steps {
         echo 'Nothing to build, its Python ...'
         script {
-	  cat app.py
-	  version = cat versionid
-	  echo $version
+	  def vId = sh(  returnStdout: true, script: 'cat versionid')
+          env.version =  vId
         }
+	echo 'Version: $version'
       }
     }
     stage('Building Container Image') {
