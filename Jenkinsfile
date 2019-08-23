@@ -31,7 +31,6 @@ pipeline {
       steps {
         echo 'Deploying to Docker Hub ...'
         sh './cicd/post-cicd-job.sh ${DOCKER_REPO} ${DOCKER_IMAGE} ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
-        }
       }
     }
     stage('Deploying to Canary Kubernetes Site') {
