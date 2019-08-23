@@ -22,4 +22,8 @@ sed -i "s/VERSIONID/${VERSIONID}/g" deploy.yaml
 
 kubectl apply -f ./deploy.yaml
 
+echo
+echo "Pausing for new deployment to start up and take over ..."
+sleep 10
+
 exit 0
