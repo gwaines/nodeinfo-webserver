@@ -25,9 +25,9 @@ kubectl apply -f ./deploy.yaml
 echo "Pausing for deployment update to start ..."
 sleep 2
 
-numPods = `kubectl get pods | fgrep nodeinfo | wc -l`
-numRunning = `kubectl get pods | fgrep nodeinfo | fgrep Running | wc -l`
-numTries = 1
+numPods=`kubectl get pods | fgrep nodeinfo | wc -l`
+numRunning=`kubectl get pods | fgrep nodeinfo | fgrep Running | wc -l`
+numTries=0
 
 while [[ $numPods -ne 3 || $numRunning -ne 3 ]] 
 do
@@ -36,13 +36,14 @@ do
     echo "Deployment taking too long ..."
     exit 1
   fi
+  numTries=$((numTries + 1))
 
-  kubectl get pods
+  kubectl get pods | fgrep nodeinfo
   echo
-  echo "Waiting for deployment update to finish ..."
+  echo "Waiting for deployment update to finish (" $numTries ") ..."
   sleep 5
-  numPods = `kubectl get pods | fgrep nodeinfo | wc -l`
-  numRunning = `kubectl get pods | fgrep nodeinfo | fgrep Running | wc -l`
+  numPods=`kubectl get pods | fgrep nodeinfo | wc -l`
+  numRunning=`kubectl get pods | fgrep nodeinfo | fgrep Running | wc -l`
 done
 
 exit 0
