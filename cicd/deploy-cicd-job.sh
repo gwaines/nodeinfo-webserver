@@ -22,8 +22,27 @@ sed -i "s/VERSIONID/${VERSIONID}/g" deploy.yaml
 
 kubectl apply -f ./deploy.yaml
 
-echo
-echo "Pausing for new deployment to start up and take over ..."
-sleep 10
+echo "Pausing for deployment update to start ..."
+sleep 2
+
+numPods = `kubectl get pods | fgrep nodeinfo | wc -l`
+numRunning = `kubectl get pods | fgrep nodeinfo | fgrep Running | wc -l`
+numTries = 1
+
+while [[ $numPods -ne 3 || $numRunning -ne 3 ]] 
+do
+  if [[ $numTries -gt 20 ]]
+  then
+    echo "Deployment taking too long ..."
+    exit 1
+  fi
+
+  kubectl get pods
+  echo
+  echo "Waiting for deployment update to finish ..."
+  sleep 5
+  numPods = `kubectl get pods | fgrep nodeinfo | wc -l`
+  numRunning = `kubectl get pods | fgrep nodeinfo | fgrep Running | wc -l`
+done
 
 exit 0
