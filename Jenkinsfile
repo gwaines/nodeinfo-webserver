@@ -47,6 +47,7 @@ pipeline {
     }
     stage('Deploying to Production Kubernetes Site') {
       steps {
+	input("Confirm deployment to PRODUCTION Kubernetes Site?")
         echo 'Deploying to Production Kubernetes Site ...'
       }
     }

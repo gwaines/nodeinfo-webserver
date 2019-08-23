@@ -18,8 +18,8 @@ install:
   - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 
 script:
-  - ./cicd/build-cicd-job.sh
-  - ./cicd/test-cicd-job.sh
+  - ./cicd/build-cicd-job.sh ${DOCKER_IMAGE}
+  - ./cicd/test-cicd-job.sh ${DOCKER_IMAGE}
   
 after_success:
   - ./cicd/post-cicd-job.sh ${DOCKER_REPO} ${DOCKER_IMAGE} ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
